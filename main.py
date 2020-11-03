@@ -1,49 +1,25 @@
-from function import print_all_task, get_current_datetime, success_msg, error_msg
+import matplotlib.pyplot as plt
+from function import RandomWalk
 
+# x_values = [1, 2, 3, 4, 5] 
+# y_values = [1, 4, 9, 16, 25]
 
-data = {}
+fig = plt.figure()
+ax = fig.gca(projection='3d')
 
-task = ""
-helper_static = {"isdone": False, "created_on": ""}
+random_walk = RandomWalk()
+random_walk.fill_walk()
+# print(random_walk.x_values)
 
-while True:
-    action = input("Your action ('create', 'read' 'update', 'delete') (if exit enter 'x' ): : ")
-    if action == 'x':
-        break
-    if action == "create":
-        task = input("Add task : ")
-        tasks_list = list(data.keys())
-        if task in tasks_list:
-            error_msg("your task has already created")
-        else:
-            helper_static["created_on"] = get_current_datetime()
-            helper_static["isdone"] = False
-            data[task] = helper_static
-            
-            success_msg("created")
+point_numbers = list(range(random_walk.num_points))
 
-    elif action == "read":
-        print_all_task(data)
-    elif action == "update":
-        task = input("Enter task name which you want to update: ")
-        tasks_list = list(data.keys())
-        if task in tasks_list:
-            data[task] = {"isdone": True, "created_on": data[task]["created_on"]}
-            
-            success_msg("updated")
-        else:
-            error_msg("your task isn't in database")
+surf = ax.scatter(random_walk.x_values, random_walk.y_values, random_walk.z_values, c=random_walk.x_values, cmap=plt.cm.Blues, edgecolors=None)
+# plt.scatter(random_walk.x_values, random_walk.y_values, random_walk.z_values, c=point_numbers, cmap=plt.cm.Blues, edgecolors=None)
 
-    elif action == "delete":
-        task = input("Enter task name which you want to delete: ")
-        tasks_list = list(data.keys())
-        if task in tasks_list:
-            del data[task]
-            success_msg("deleted")
-        else:
-            error_msg("your task isn't in database")
-      
-    else:
-        print("I don't have this action please try again !!!")
+plt.title("Geolab scatter", fontsize=20)
 
-# print_all_task(data)
+plt.xlabel("X label")
+plt.ylabel("Y label")
+
+plt.show()
+# plt.savefig('fig.png', bbox_inches='tight')

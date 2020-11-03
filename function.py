@@ -1,25 +1,34 @@
-from datetime import datetime
+from random import choice
+class RandomWalk():
+    def __init__(self, num_points=5000):
 
-def print_all_task(tasks):
-    if len(tasks) > 0:
-        j = 1
-        print("id. name\t    status\tcreated on")
-        for key, value in tasks.items():
-            status = value["isdone"]
-            status_text = "not complate"
-            if status == True:
-                status_text = "complated"
-            created_on = value["created_on"]
-            print(f"{j}.  {key}    {status_text}       {created_on}")
-            j+=1
-    else:
-        print("You don't have any task")
+        self.num_points = num_points
+        self.x_values = [0] 
+        self.y_values = [0]
+        self.z_values = [0]
+        
+    def fill_walk(self):
+        while len(self.x_values) < self.num_points:
+            # Decide which direction to go and how far to go in that direction.
+            x_direction = choice([1, -1])
+            x_distance = choice([0, 1, 2, 3, 4])
+            x_step = x_direction * x_distance
 
-def success_msg(msg_type):
-    print(f"Your task succesfuly {msg_type}")
+            y_direction = choice([1, -1])
+            y_distance = choice([0, 1, 2, 3, 4])
+            y_step = y_direction * y_distance
+            
+            z_direction = choice([1, -1])
+            z_distance = choice([0, 1, 2, 3, 4])
+            z_step = z_direction * z_distance
 
-def get_current_datetime():
-    return datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-
-def error_msg(error_str):
-    print(f"Error: {error_str}")
+            # Reject moves that go nowhere.
+            if x_step == 0 and y_step ==0 and z_step== 0:
+                continue
+            # Calculate the next x and y
+            next_x = self.x_values[-1] + x_step
+            next_y = self.y_values[-1] + y_step
+            next_z = self.z_values[-1] + z_step
+            self.x_values.append(next_x) 
+            self.y_values.append(next_y)
+            self.z_values.append(next_z)
