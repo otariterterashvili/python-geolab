@@ -1,14 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
+# import all module
+from iuda_app.auth.view import auth
+from iuda_app.product.view import product
 
+# wrapp whole application
 app = Flask(__name__)
 
 app.secret_key = os.urandom(12)
 
-user_data = [
-  {"email": "oto@gmail.com", "password": "oto12345" },
-  {"email": "ia@gmail.com", "password": "ia12345" }
-]
+# register bluprints
+app.register_blueprint(auth, url_prefix="/auth")
+app.register_blueprint(product, url_prefix="/product")
 
 @app.route("/")
 def index():
@@ -16,38 +19,7 @@ def index():
   if is_login == True:
     return render_template("home.html")
   else:
-    return redirect(url_for("login_page"))
-
-@app.route("/sign-in", methods=['GET', 'POST'])
-def login_page():
-  method = request.method
-
-  error_msg = ""
-  if method == "POST":
-    email = request.form.get("email", None)
-    password = request.form.get("password", None)
-    print(email, password)
-    if email and password:
-      for user in user_data:
-        if user.get("email") == email and user.get("password") == password:
-          session["is_login"] = True
-          session["user_email"] = email
-          return redirect(url_for("index"))
-        else:
-          error_msg = "Invalid credentional"
-          render_template("login.html", error_msg=error_msg)
-    else:
-      error_msg = "Please fill all field"
-      render_template("login.html", error_msg=error_msg)
-
-  return render_template("login.html", error_msg=error_msg)
-
-@app.route("/logout")
-def logout():
-  session["is_login"] = False
-  return redirect(url_for("login_page"))
-
-
+    return redirect(url_for("auth.login_page"))
 
 
 

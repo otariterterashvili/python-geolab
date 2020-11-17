@@ -6,6 +6,7 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='tailwind.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" charset="utf-8"></script>
 </head>
 <body>
   <nav class="relative flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-orange-500 mb-3">
@@ -34,7 +35,7 @@
             </li>
             {% if session.get("is_login", False) %}
               <li class="nav-item">
-                <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{url_for("logout")}}">
+                <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{url_for("auth.logout")}}">
                   log out
                 </a>
               </li>
@@ -46,7 +47,7 @@
               </li>
             {% else %}
               <li class="nav-item">
-                <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{url_for("login_page")}}">
+                <a class="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{url_for("auth.login_page")}}">
                   login
                 </a>
               </li>

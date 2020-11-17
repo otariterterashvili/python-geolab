@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block title %}The Best price | {{product.get("name")}}{% endblock %}
+{% block content %}
+  <section class="product-section">
+    <div class="container mx-auto px-4 h-full flex">
+      <div class="flex flex-wrap justify-center">
+        <div>
+          <div class="w-6/12 sm:w-4/12 px-4">
+            <img src="{{product.get("img")}}" alt="..." class="shadow rounded max-w-full h-auto align-middle border-none" />
+          </div>
+        </div>
+        <div>
+          <h2 class="text-5xl font-normal leading-normal mt-0 mb-2 text-gray-800">
+            {{product.get("name")}}
+          </h2>
+        </div>
+        <div>
+          <p class="text-base font-light leading-relaxed mt-0 mb-4 text-gray-800">
+            {{product.get("description")}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
