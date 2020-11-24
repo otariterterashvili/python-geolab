@@ -23,6 +23,10 @@ product_data = [
 def product_home():
   return render_template("products.html", products=product_data)
 
+@product.route("/add-product")
+def add_product(): 
+  return "Add prodcut"
+
 @product.route("/<int:id>")
 def get_product(id):
   for prod_element in product_data:

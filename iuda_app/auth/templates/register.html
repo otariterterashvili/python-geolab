@@ -1,0 +1,80 @@
+{% extends "index.html" %}
+{% block title %}Iuda show | Register User{% endblock %}
+{% block content %}
+<section class="login-section">
+  <div class="container mx-auto px-4 h-full">
+    <div class="flex content-center items-center justify-center h-full">
+      <div class="w-full lg:w-4/12 px-4">
+        <div
+          class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0"
+        >
+          <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+            <div class="text-gray-500 text-center mb-3 font-bold">
+              <small>Sign up user</small>
+            </div>
+            <form method="POST" action="{{url_for("auth.register_user")}}">
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                  for="name-input"
+                  >Name</label
+                ><input
+                  id="name-input"
+                  name="name"
+                  type="text"
+                  class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                  placeholder="Name"
+                  style="transition: all 0.15s ease 0s;"
+                />
+              </div>
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                  for="email-input"
+                  >Email</label
+                ><input
+                  id="email-input"
+                  name="email"
+                  type="email"
+                  class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                  placeholder="Email"
+                  style="transition: all 0.15s ease 0s;"
+                />
+              </div>
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-gray-700 text-xs font-bold mb-2"
+                  for="grid-password"
+                  >Password</label
+                ><input
+                  id="grid-password"
+                  name="password"
+                  type="password"
+                  class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                  placeholder="Password"
+                  style="transition: all 0.15s ease 0s;"
+                />
+              </div>
+              {% if error_msg != "" %}
+                <div class="text-center mt-4 text-red-700">
+                  {{ error_msg }}
+                </div>
+              {% endif %}
+
+              <div class="text-center mt-6">
+                <button
+                  class="bg-orange-500 text-white active:bg-orange-200 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                  type="submit"
+                  style="transition: all 0.15s ease 0s;"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
